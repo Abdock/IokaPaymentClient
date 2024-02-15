@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IokaPaymentClient", "IokaPaymentClient\IokaPaymentClient.csproj", "{51191ADC-4B9A-414C-A437-B1A7E7C99799}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IokaPayment.Accounts", "IokaPayment.Accounts\IokaPayment.Accounts.csproj", "{A9F9903D-E0F7-4E7E-9177-516561583F54}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IokaPayment.General", "IokaPayment.General\IokaPayment.General.csproj", "{43898121-102F-4D18-A18E-6FA4BDA95956}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -8,9 +10,13 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{51191ADC-4B9A-414C-A437-B1A7E7C99799}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{51191ADC-4B9A-414C-A437-B1A7E7C99799}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{51191ADC-4B9A-414C-A437-B1A7E7C99799}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{51191ADC-4B9A-414C-A437-B1A7E7C99799}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A9F9903D-E0F7-4E7E-9177-516561583F54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9F9903D-E0F7-4E7E-9177-516561583F54}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9F9903D-E0F7-4E7E-9177-516561583F54}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9F9903D-E0F7-4E7E-9177-516561583F54}.Release|Any CPU.Build.0 = Release|Any CPU
+		{43898121-102F-4D18-A18E-6FA4BDA95956}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43898121-102F-4D18-A18E-6FA4BDA95956}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43898121-102F-4D18-A18E-6FA4BDA95956}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43898121-102F-4D18-A18E-6FA4BDA95956}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
