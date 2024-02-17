@@ -4,7 +4,7 @@ using IokaPayment.General.Models;
 
 namespace IokaPayment.Accounts.Responses;
 
-public record Account
+public record AccountResponse
 {
     [JsonPropertyName("id")]
     public required string Id { get; init; }
@@ -16,7 +16,6 @@ public record Account
     public required string CustomerId { get; init; }
 
     [JsonPropertyName("status")]
-    [JsonConverter(typeof(JsonStringEnumConverter<AccountStatus>))]
     public required AccountStatus Status { get; init; }
 
     [JsonPropertyName("name")]
@@ -26,7 +25,6 @@ public record Account
     public required string Amount { get; init; }
 
     [JsonPropertyName("currency")]
-    [JsonConverter(typeof(JsonStringEnumConverter<Currency>))]
     public required Currency Currency { get; init; }
 
     [JsonPropertyName("resources")]

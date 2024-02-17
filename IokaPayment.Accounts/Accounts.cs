@@ -2,6 +2,7 @@
 using IokaPayment.General.Configuration;
 using IokaPayment.General.Extensions;
 using IokaPayment.General.Responses;
+using Microsoft.Extensions.Logging;
 
 namespace IokaPayment.Accounts;
 
@@ -9,15 +10,16 @@ public class Accounts : IAccounts
 {
     private readonly HttpClient _httpClient;
     private readonly IokaConfiguration _configuration;
+    private readonly ILogger<Accounts> _logger;
 
-    public Accounts(HttpClient httpClient, IokaConfiguration configuration)
+    public Accounts(HttpClient httpClient, IokaConfiguration configuration, ILogger<Accounts> logger)
     {
         _httpClient = httpClient;
         _configuration = configuration;
+        _logger = logger;
     }
 
-    public async Task<Response<IReadOnlyCollection<Account>>> GetAccountsAsync(
-        CancellationToken cancellationToken = default)
+    public async Task<Response<IReadOnlyCollection<AccountResponse>>> GetAccountsAsync(CancellationToken cancellationToken = default)
     {
         var uri = $"{_configuration.Host}/accounts";
         using var request = new HttpRequestMessage(HttpMethod.Get, uri);
@@ -26,15 +28,15 @@ public class Accounts : IAccounts
         var json = await response.Content.ReadAsStringAsync(cancellationToken);
         if (response.IsSuccessStatusCode)
         {
-            return json.DeserializeFromJson<List<Account>>();
+            return json.DeserializeFromJson<List<AccountResponse>>();
         }
 
         var error = json.DeserializeFromJson<ErrorResponse>();
+        _logger.LogError("Sent GET request to {Uri}, and received error {ErrorJson}", uri, json);
         return error;
     }
 
-    public async Task<Response<Account>> GetAccountAsync(string accountId,
-        CancellationToken cancellationToken = default)
+    public async Task<Response<AccountResponse>> GetAccountAsync(string accountId, CancellationToken cancellationToken = default)
     {
         var uri = $"{_configuration.Host}/accounts/{accountId}";
         using var request = new HttpRequestMessage(HttpMethod.Get, uri);
@@ -43,10 +45,11 @@ public class Accounts : IAccounts
         var json = await response.Content.ReadAsStringAsync(cancellationToken);
         if (response.IsSuccessStatusCode)
         {
-            return json.DeserializeFromJson<Account>();
+            return json.DeserializeFromJson<AccountResponse>();
         }
 
         var error = json.DeserializeFromJson<ErrorResponse>();
+        _logger.LogError("Sent GET request to {Uri}, and received error {ErrorJson}", uri, json);
         return error;
     }
 }

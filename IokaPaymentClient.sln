@@ -4,6 +4,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IokaPayment.Accounts", "Iok
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IokaPayment.General", "IokaPayment.General\IokaPayment.General.csproj", "{43898121-102F-4D18-A18E-6FA4BDA95956}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IokaPayment.Orders", "IokaPayment.Orders\IokaPayment.Orders.csproj", "{D27E72DC-7173-4ECE-B76F-DD8732665EFA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IokaPayment.Tests", "IokaPayment.Tests\IokaPayment.Tests.csproj", "{D87DC039-7EC5-4C96-A34D-BBE41DC36A70}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +22,13 @@ Global
 		{43898121-102F-4D18-A18E-6FA4BDA95956}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{43898121-102F-4D18-A18E-6FA4BDA95956}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{43898121-102F-4D18-A18E-6FA4BDA95956}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D27E72DC-7173-4ECE-B76F-DD8732665EFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D27E72DC-7173-4ECE-B76F-DD8732665EFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D27E72DC-7173-4ECE-B76F-DD8732665EFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D27E72DC-7173-4ECE-B76F-DD8732665EFA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D87DC039-7EC5-4C96-A34D-BBE41DC36A70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D87DC039-7EC5-4C96-A34D-BBE41DC36A70}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D87DC039-7EC5-4C96-A34D-BBE41DC36A70}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D87DC039-7EC5-4C96-A34D-BBE41DC36A70}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
