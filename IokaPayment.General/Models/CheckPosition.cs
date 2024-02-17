@@ -6,26 +6,26 @@ namespace IokaPayment.General.Models;
 public record CheckPosition
 {
     [JsonPropertyName("name")]
-    public string Name { get; set; }
+    public required string Name { get; set; }
 
     [JsonPropertyName("amount")]
-    public int Amount { get; set; }
+    public required int Amount { get; set; }
 
     [JsonPropertyName("count")]
-    public int Count { get; set; }
+    public required int Count { get; set; }
 
     [JsonPropertyName("section")]
-    public int Section { get; set; }
+    public required int Section { get; set; }
 
     [JsonPropertyName("tax_percent")]
-    public int TaxPercent { get; set; }
+    public required int TaxPercent { get; set; }
 
     [JsonPropertyName("tax_type")]
-    public TaxType TaxType { get; set; }
+    public required TaxType TaxType { get; set; }
 
     [JsonPropertyName("tax_amount")]
-    public int TaxAmount { get; set; }
+    public required int TaxAmount { get; set; }
 
     [JsonPropertyName("unit_code")]
-    public int UnitCode { get; set; }
+    public required int UnitCode { get; set; }
 }
