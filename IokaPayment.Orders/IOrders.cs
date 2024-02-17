@@ -1,4 +1,7 @@
-﻿namespace IokaPayment.Orders;
+﻿using IokaPayment.Orders.Requests;
+using IokaPayment.Orders.Responses;
+
+namespace IokaPayment.Orders;
 
 public interface IOrders
 {

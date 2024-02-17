@@ -21,6 +21,7 @@
       <ProjectReference Include="..\IokaPayment.Accounts\IokaPayment.Accounts.csproj" />
       <ProjectReference Include="..\IokaPayment.General\IokaPayment.General.csproj" />
       <ProjectReference Include="..\IokaPayment.Orders\IokaPayment.Orders.csproj" />
+      <ProjectReference Include="..\IokaPayment.Refunds\IokaPayment.Refunds.csproj" />
     </ItemGroup>
 
 </Project>

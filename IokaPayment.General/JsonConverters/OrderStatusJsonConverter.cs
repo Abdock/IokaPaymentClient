@@ -28,6 +28,9 @@ public class OrderStatusJsonConverter : JsonConverter<OrderStatus>
             case OrderStatus.OnHold:
                 writer.WriteStringValue("ON_HOLD");
                 break;
+            case OrderStatus.Pending:
+                writer.WriteStringValue("PENDING");
+                break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(value), value, null);
         }

@@ -1,6 +1,7 @@
 using IokaPayment.Accounts.Responses;
 using IokaPayment.General.Extensions;
-using IokaPayment.Orders.Requests;
+using IokaPayment.Orders.Responses;
+using IokaPayment.Refunds.Responses;
 
 namespace IokaPayment.Tests;
 
@@ -43,28 +44,66 @@ public class Tests
     }
 
     [Test]
-    public void CreateQueryStringToGetOrders_Used2Arguments_ShouldReturnCorrectQueryString()
+    public void OrderMapFromJson()
     {
-        var query = new OrdersPaginationQuery
+        const string json = """
+                            {
+                              "id": "string",
+                              "shop_id": "string",
+                              "status": "EXPIRED",
+                              "created_at": "2019-08-24T14:15:22Z",
+                              "amount": 0,
+                              "currency": "KZT",
+                              "capture_method": "AUTO",
+                              "external_id": "string",
+                              "description": "string",
+                              "extra_info": {},
+                              "attempts": 50,
+                              "due_date": "2019-08-24T14:15:22Z",
+                              "customer_id": "string",
+                              "card_id": "string",
+                              "back_url": "http://example.com",
+                              "success_url": "http://example.com",
+                              "failure_url": "http://example.com",
+                              "template": "string",
+                              "checkout_url": "http://example.com",
+                              "access_token": "string",
+                              "mcc": "string"
+                            }
+                            """;
+        Order? order = default;
+        Assert.DoesNotThrow(() =>
         {
-            Page = 1,
-            Limit = 10
-        };
-        Assert.That(query.ToQueryString(), Is.EqualTo("page=1&limit=10"));
+            order = json.DeserializeFromJson<Order>();
+        });
+        Assert.That(order, Is.Not.Null);
     }
 
     [Test]
-    public void CreateQueryStringToGetOrders_Used3ArgumentsWithDates_ShouldReturnCorrectQueryString()
+    public void RefundMapFromJson()
     {
-        const string fromDate = "2019-08-24T13:15:13Z";
-        const string toDate = "2019-08-24T14:15:13Z";
-        var query = new OrdersPaginationQuery
+        const string json = """
+                            {
+                              "id": "string",
+                              "payment_id": "string",
+                              "order_id": "string",
+                              "status": "PENDING",
+                              "created_at": "2019-08-24T14:15:22Z",
+                              "error": {
+                                "code": "string",
+                                "message": "string"
+                              },
+                              "acquirer": {
+                                "name": "string",
+                                "reference": "string"
+                              }
+                            }
+                            """;
+        OrderRefund? refund = default;
+        Assert.DoesNotThrow(() =>
         {
-            Page = 1,
-            Limit = 10,
-            ToDate = DateTimeOffset.Parse(toDate),
-            FromDate = DateTimeOffset.Parse(fromDate)
-        };
-        Assert.That(query.ToQueryString(), Is.EqualTo($"page=1&limit=10&to_dt={toDate}&from_dt={fromDate}"));
+            refund = json.DeserializeFromJson<OrderRefund>();
+        });
+        Assert.That(refund, Is.Not.Null);
     }
 }

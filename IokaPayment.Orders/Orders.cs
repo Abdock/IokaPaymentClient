@@ -1,4 +1,6 @@
 ﻿using System.Net.Http.Json;
+using IokaPayment.Orders.Requests;
+using IokaPayment.Orders.Responses;
 using Microsoft.Extensions.Logging;
 
 namespace IokaPayment.Orders;
