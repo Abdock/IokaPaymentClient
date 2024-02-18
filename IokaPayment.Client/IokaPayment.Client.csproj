@@ -4,6 +4,10 @@
         <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <PackageId>IokaPayment.DependencyInjection</PackageId>
+        <Title>Ioka payment client</Title>
+        <Authors>Abdussattar Kassymbekov</Authors>
     </PropertyGroup>
 
     <ItemGroup>

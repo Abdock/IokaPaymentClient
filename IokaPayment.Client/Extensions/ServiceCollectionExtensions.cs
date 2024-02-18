@@ -1,5 +1,5 @@
-﻿using IokaPayment.Accounts;
-using IokaPayment.Client.Configurations;
+﻿using System.Reflection;
+using IokaPayment.Accounts;
 using IokaPayment.General.Configuration;
 using IokaPayment.Orders;
 using IokaPayment.Payments;
@@ -13,18 +13,16 @@ public static class ServiceCollectionExtensions
 {
     public static IServiceCollection AddIokaPaymentClient(this IServiceCollection services, Action<IokaPaymentConfiguration> configure)
     {
-        var configuration = new IokaPaymentConfiguration();
-        configure(configuration);
-        services.AddTransient<IokaConfiguration>(_ => new IokaConfiguration
+        var iokaServices = AppDomain.CurrentDomain.GetAssemblies()
+            .SelectMany(e=>e.DefinedTypes)
+            .Where(e=>e.IsAssignableTo(typeof(IIokaService)) && e is { IsAbstract: false, IsInterface: false })
+            .Select(Activator.CreateInstance)
+            .Cast<IIokaService>()
+            .ToList();
+        foreach (var iokaService in iokaServices)
         {
-            ApiKey = configuration.ApiKey,
-            Environment = configuration.Environment
-        });
-        services.AddScoped<IAccounts, IokaAccounts>();
-        services.AddScoped<IOrders, IokaOrders>();
-        services.AddScoped<IPayments, IokaPayments>();
-        services.AddScoped<IRefunds, IokaRefunds>();
-        services.AddScoped<ISubscriptions, IokaSubscriptions>();
+            iokaService.ConfigureServices(services, configure);
+        }
         return services;
     }
 }

@@ -1,6 +1,6 @@
 ﻿using IokaPayment.General.Enums;
 
-namespace IokaPayment.Client.Configurations;
+namespace IokaPayment.General.Configuration;
 
 public record IokaPaymentConfiguration
 {
