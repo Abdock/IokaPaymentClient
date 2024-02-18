@@ -6,13 +6,13 @@ using Microsoft.Extensions.Logging;
 
 namespace IokaPayment.Accounts;
 
-public class Accounts : IAccounts
+public class IokaAccounts : IAccounts
 {
     private readonly HttpClient _httpClient;
     private readonly IokaConfiguration _configuration;
-    private readonly ILogger<Accounts> _logger;
+    private readonly ILogger<IokaAccounts> _logger;
 
-    public Accounts(HttpClient httpClient, IokaConfiguration configuration, ILogger<Accounts> logger)
+    public IokaAccounts(HttpClient httpClient, IokaConfiguration configuration, ILogger<IokaAccounts> logger)
     {
         _httpClient = httpClient;
         _configuration = configuration;

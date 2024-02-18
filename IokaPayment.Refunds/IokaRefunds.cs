@@ -2,13 +2,13 @@
 
 namespace IokaPayment.Refunds;
 
-public class Refunds : IRefunds
+public class IokaRefunds : IRefunds
 {
     private readonly HttpClient _httpClient;
     private readonly IokaConfiguration _configuration;
-    private readonly ILogger<Refunds> _logger;
+    private readonly ILogger<IokaRefunds> _logger;
 
-    public Refunds(HttpClient httpClient, IokaConfiguration configuration, ILogger<Refunds> logger)
+    public IokaRefunds(HttpClient httpClient, IokaConfiguration configuration, ILogger<IokaRefunds> logger)
     {
         _httpClient = httpClient;
         _configuration = configuration;

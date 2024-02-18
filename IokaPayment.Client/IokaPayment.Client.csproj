@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\IokaPayment.Accounts\IokaPayment.Accounts.csproj" />
+      <ProjectReference Include="..\IokaPayment.General\IokaPayment.General.csproj" />
+      <ProjectReference Include="..\IokaPayment.Orders\IokaPayment.Orders.csproj" />
+      <ProjectReference Include="..\IokaPayment.Payments\IokaPayment.Payments.csproj" />
+      <ProjectReference Include="..\IokaPayment.Refunds\IokaPayment.Refunds.csproj" />
+      <ProjectReference Include="..\IokaPayment.Subscriptions\IokaPayment.Subscriptions.csproj" />
+    </ItemGroup>
+
+</Project>

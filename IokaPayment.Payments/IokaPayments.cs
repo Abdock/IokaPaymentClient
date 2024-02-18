@@ -1,96 +1,96 @@
 ﻿using Microsoft.Extensions.Logging;
 
-namespace IokaPayment.Subscriptions;
+namespace IokaPayment.Payments;
 
-public class Subscriptions : ISubscriptions
+public class IokaPayments : IPayments
 {
     private readonly HttpClient _httpClient;
     private readonly IokaConfiguration _configuration;
-    private readonly ILogger<Subscriptions> _logger;
+    private readonly ILogger<IokaPayments> _logger;
 
-    public Subscriptions(HttpClient httpClient, IokaConfiguration configuration, ILogger<Subscriptions> logger)
+    public IokaPayments(HttpClient httpClient, IokaConfiguration configuration, ILogger<IokaPayments> logger)
     {
         _httpClient = httpClient;
         _configuration = configuration;
         _logger = logger;
     }
 
-    public async Task<Response<PagedResponse<Subscription>>> GetSubscriptionsAsync(SubscriptionsPaginationQuery query, CancellationToken cancellationToken = default)
+    public async Task<Response<PagedResponse<Payment>>> GetPaymentsAsync(PaymentsPaginationQuery query, CancellationToken cancellationToken = default)
     {
-        var uri = $"{_configuration.Host}/subscriptions";
+        var uri = $"{_configuration.Host}/orders/{query.OrderId}/payments?{query.ToQueryString()}";
         using var request = new HttpRequestMessage(HttpMethod.Get, uri);
         request.AddApiKey(_configuration.ApiKey);
         using var response = await _httpClient.SendAsync(request, cancellationToken);
         var json = await response.Content.ReadAsStringAsync(cancellationToken);
         if (response.IsSuccessStatusCode)
         {
-            var subscriptions = json.DeserializeFromJson<List<Subscription>>();
+            var payments = json.DeserializeFromJson<List<Payment>>();
             var totalCount = int.Parse(response.Headers.GetValues(HttpHeaderConstants.TotalCount).First());
-            return new PagedResponse<Subscription>
+            return new PagedResponse<Payment>
             {
-                Data = subscriptions,
+                Data = payments,
                 TotalCount = totalCount
             };
         }
-        
+
         var error = json.DeserializeFromJson<ErrorResponse>();
         _logger.LogError("Sent GET request to {Uri}, and received error {ErrorJson}", uri, json);
         return error;
     }
 
-    public async Task<Response<Subscription>> CreateSubscriptionAsync(CreateSubscription query, CancellationToken cancellationToken = default)
+    public async Task<Response<OrderPayment>> CreateCardPaymentAsync(CardPayment cardPayment, CancellationToken cancellationToken = default)
     {
-        query.ThrowIfValidationFailed();
-        var uri = $"{_configuration.Host}/subscriptions";
+        cardPayment.ThrowIfValidationFailed();
+        var uri = $"{_configuration.Host}/orders/{cardPayment.OrderId}/payments/card";
         using var request = new HttpRequestMessage(HttpMethod.Post, uri);
         request.AddApiKey(_configuration.ApiKey);
         using var response = await _httpClient.SendAsync(request, cancellationToken);
         var json = await response.Content.ReadAsStringAsync(cancellationToken);
         if (response.IsSuccessStatusCode)
         {
-            var subscription = json.DeserializeFromJson<Subscription>();
-            return subscription;
+            var payment = json.DeserializeFromJson<OrderPayment>();
+            return payment;
         }
-        
+
         var error = json.DeserializeFromJson<ErrorResponse>();
         _logger.LogError("Sent POST request to {Uri}, and received error {ErrorJson}", uri, json);
         return error;
     }
 
-    public async Task<Response<Subscription>> GetSubscriptionByIdAsync(string subscriptionId, CancellationToken cancellationToken = default)
+    public async Task<Response<OrderPayment>> CreateToolPaymentAsync(ToolPayment toolPayment, CancellationToken cancellationToken = default)
     {
-        var uri = $"{_configuration.Host}/subscriptions/{subscriptionId}";
+        toolPayment.ThrowIfValidationFailed();
+        var uri = $"{_configuration.Host}/orders/{toolPayment.OrderId}/payments/tool";
+        using var request = new HttpRequestMessage(HttpMethod.Post, uri);
+        request.AddApiKey(_configuration.ApiKey);
+        using var response = await _httpClient.SendAsync(request, cancellationToken);
+        var json = await response.Content.ReadAsStringAsync(cancellationToken);
+        if (response.IsSuccessStatusCode)
+        {
+            var payment = json.DeserializeFromJson<OrderPayment>();
+            return payment;
+        }
+
+        var error = json.DeserializeFromJson<ErrorResponse>();
+        _logger.LogError("Sent POST request to {Uri}, and received error {ErrorJson}", uri, json);
+        return error;
+    }
+
+    public async Task<Response<OrderPayment>> GetPaymentByIdAsync(GetPayment query, CancellationToken cancellationToken = default)
+    {
+        var uri = $"{_configuration.Host}/orders/{query.OrderId}/payments/{query.PaymentId}";
         using var request = new HttpRequestMessage(HttpMethod.Get, uri);
         request.AddApiKey(_configuration.ApiKey);
         using var response = await _httpClient.SendAsync(request, cancellationToken);
         var json = await response.Content.ReadAsStringAsync(cancellationToken);
         if (response.IsSuccessStatusCode)
         {
-            var subscription = json.DeserializeFromJson<Subscription>();
-            return subscription;
+            var payment = json.DeserializeFromJson<OrderPayment>();
+            return payment;
         }
-        
+
         var error = json.DeserializeFromJson<ErrorResponse>();
         _logger.LogError("Sent GET request to {Uri}, and received error {ErrorJson}", uri, json);
-        return error;
-    }
-
-    public async Task<Response<Subscription>> ChangeSubscriptionStatusAsync(ChangeSubscriptionStatus query, CancellationToken cancellationToken = default)
-    {
-        query.ThrowIfValidationFailed();
-        var uri = $"{_configuration.Host}/subscriptions/{query.SubscriptionId}";
-        using var request = new HttpRequestMessage(HttpMethod.Put, uri);
-        request.AddApiKey(_configuration.ApiKey);
-        using var response = await _httpClient.SendAsync(request, cancellationToken);
-        var json = await response.Content.ReadAsStringAsync(cancellationToken);
-        if (response.IsSuccessStatusCode)
-        {
-            var subscription = json.DeserializeFromJson<Subscription>();
-            return subscription;
-        }
-        
-        var error = json.DeserializeFromJson<ErrorResponse>();
-        _logger.LogError("Sent PUT request to {Uri}, and received error {ErrorJson}", uri, json);
         return error;
     }
 }
