@@ -23,7 +23,7 @@ public record OrderData
     public string Description { get; init; } = string.Empty;
 
     [JsonPropertyName("mcc")]
-    [RegularExpression(@"^\d{4}$", ErrorMessage = "MCC must be 4 digits")]
+    [RegularExpression(IokaRegexConstants.MccRegex, ErrorMessage = "MCC must be 4 digits")]
     public required string Mcc { get; init; }
 
     [JsonPropertyName("extra_info")]

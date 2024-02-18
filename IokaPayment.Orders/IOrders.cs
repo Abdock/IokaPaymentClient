@@ -1,4 +1,5 @@
-﻿using IokaPayment.Orders.Requests;
+﻿using IokaPayment.General.Models;
+using IokaPayment.Orders.Requests;
 using IokaPayment.Orders.Responses;
 
 namespace IokaPayment.Orders;
@@ -9,6 +10,6 @@ public interface IOrders
     Task<Response<PagedResponse<Order>>> GetOrdersAsync(OrdersPaginationQuery request, CancellationToken cancellationToken = default);
     Task<Response<Order>> GetOrderByIdAsync(string orderId, CancellationToken cancellationToken = default);
     Task<Response<Order>> UpdateOrderByIdAsync(UpdateOrderRequest updateRequest, CancellationToken cancellationToken = default);
-    Task<Response<ModifiedOrder>> CaptureOrderAsync(CaptureOrderRequest captureRequest, CancellationToken cancellationToken = default);
-    Task<Response<ModifiedOrder>> CancelOrderAsync(CancelOrderRequest cancelRequest, CancellationToken cancellationToken = default);
+    Task<Response<OrderPayment>> CaptureOrderAsync(CaptureOrderRequest captureRequest, CancellationToken cancellationToken = default);
+    Task<Response<OrderPayment>> CancelOrderAsync(CancelOrderRequest cancelRequest, CancellationToken cancellationToken = default);
 }

@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Reflection;
 using IokaPayment.General.Attributes;
 using IokaPayment.General.Constants;
 using IokaPayment.General.Enums;
@@ -19,8 +20,24 @@ public abstract record PaginationQuery
     [QueryParameterName("from_dt")]
     public virtual DateTimeOffset? FromDate { get; init; }
 
+    [QueryParameterName("amount_category")]
+    public AmountCategory? AmountCategory { get; init; }
+
     [QueryParameterName("date_category")]
     public virtual DateCategory? DateCategory { get; init; }
+
+    [QueryParameterName("fixed_amount")]
+    [Range(0, int.MaxValue)]
+    public int? FixedAmount { get; init; }
+
+    [QueryParameterName("min_amount")]
+    [Range(0, int.MaxValue)]
+    public int? MinAmount { get; init; }
+
+    [QueryParameterName("max_amount")]
+    [Range(1, int.MaxValue)]
+    public int? MaxAmount { get; init; }
+
 
     public virtual string ToQueryString(bool beginQuery = false)
     {
@@ -33,14 +50,19 @@ public abstract record PaginationQuery
                 return current;
             }
 
-            var name = property.GetCustomAttribute<QueryParameterNameAttribute>()?.Name ?? property.Name;
+            var title = property.GetCustomAttribute<QueryParameterNameAttribute>()?.Title;
+            if (title is null)
+            {
+                return current;
+            }
+
             var stringValue = value.ToString();
             if (value is DateTimeOffset date)
             {
                 stringValue = date.ToString(FormatConstants.DateTimeFormat);
             }
 
-            return $"{current}{name.ToLowerInvariant()}={stringValue}&";
+            return $"{current}{title.ToLowerInvariant()}={stringValue}&";
         }).TrimEnd('&');
         return beginQuery ? $"?{query}" : query;
     }

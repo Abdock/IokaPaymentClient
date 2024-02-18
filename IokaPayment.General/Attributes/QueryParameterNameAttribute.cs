@@ -3,7 +3,7 @@
 [AttributeUsage(AttributeTargets.Property)]
 public class QueryParameterNameAttribute : Attribute
 {
-    public string Name { get; }
+    public string Title { get; }
 
-    public QueryParameterNameAttribute(string name) => Name = name;
+    public QueryParameterNameAttribute(string title) => Title = title;
 }
