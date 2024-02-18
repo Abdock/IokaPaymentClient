@@ -8,6 +8,7 @@
         <PackageId>IokaPayment.DependencyInjection</PackageId>
         <Title>Ioka payment client</Title>
         <Authors>Abdussattar Kassymbekov</Authors>
+        <Version>1.0.2</Version>
     </PropertyGroup>
 
     <ItemGroup>
@@ -17,6 +18,10 @@
       <ProjectReference Include="..\IokaPayment.Payments\IokaPayment.Payments.csproj" />
       <ProjectReference Include="..\IokaPayment.Refunds\IokaPayment.Refunds.csproj" />
       <ProjectReference Include="..\IokaPayment.Subscriptions\IokaPayment.Subscriptions.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.Extensions.Http" Version="8.0.0" />
     </ItemGroup>
 
 </Project>
