@@ -1,9 +1,4 @@
-﻿using IokaPayment.General.Configuration;
-using IokaPayment.General.Extensions;
-using IokaPayment.General.Responses;
-using IokaPayment.Refunds.Requests;
-using IokaPayment.Refunds.Responses;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 
 namespace IokaPayment.Refunds;
 

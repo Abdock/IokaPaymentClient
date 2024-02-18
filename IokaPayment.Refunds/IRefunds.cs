@@ -1,8 +1,4 @@
-﻿using IokaPayment.General.Responses;
-using IokaPayment.Refunds.Requests;
-using IokaPayment.Refunds.Responses;
-
-namespace IokaPayment.Refunds;
+﻿namespace IokaPayment.Refunds;
 
 public interface IRefunds
 {

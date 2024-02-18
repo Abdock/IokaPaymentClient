@@ -1,6 +1,4 @@
 ﻿using System.Text.Json.Serialization;
-using IokaPayment.General.Models;
-using IokaPayment.General.Responses;
 
 namespace IokaPayment.Payments.Responses;
 

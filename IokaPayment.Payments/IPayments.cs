@@ -1,9 +1,4 @@
-﻿using IokaPayment.General.Models;
-using IokaPayment.General.Responses;
-using IokaPayment.Payments.Requests;
-using IokaPayment.Payments.Responses;
-
-namespace IokaPayment.Payments;
+﻿namespace IokaPayment.Payments;
 
 public interface IPayments
 {

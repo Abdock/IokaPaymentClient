@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
-using IokaPayment.General.Constants;
 using IokaPayment.General.Enums;
 
 namespace IokaPayment.Payments.Requests;

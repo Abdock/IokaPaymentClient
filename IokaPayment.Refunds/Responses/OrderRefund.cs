@@ -1,7 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 using IokaPayment.General.Enums;
 using IokaPayment.General.Models;
-using IokaPayment.General.Responses;
 
 namespace IokaPayment.Refunds.Responses;
 
