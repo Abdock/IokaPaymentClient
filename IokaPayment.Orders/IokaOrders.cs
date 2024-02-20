@@ -39,7 +39,7 @@ public class IokaOrders : IOrders
         return error;
     }
 
-    public async Task<Response<PagedResponse<Order>>> GetOrdersAsync(OrdersPaginationQuery query, CancellationToken cancellationToken = default)
+    public async Task<Response<PagedResponse<ShortOrder>>> GetOrdersAsync(OrdersPaginationQuery query, CancellationToken cancellationToken = default)
     {
         var uri = $"{_configuration.Host}/orders?{query.ToQueryString()}";
         using var request = new HttpRequestMessage(HttpMethod.Get, uri);
@@ -48,9 +48,9 @@ public class IokaOrders : IOrders
         var json = await response.Content.ReadAsStringAsync(cancellationToken);
         if (response.IsSuccessStatusCode)
         {
-            var orders = json.DeserializeFromJson<List<Order>>();
+            var orders = json.DeserializeFromJson<List<ShortOrder>>();
             var totalCount = int.Parse(response.Headers.GetValues(HttpHeaderConstants.TotalCount).First());
-            return new PagedResponse<Order>
+            return new PagedResponse<ShortOrder>
             {
                 Data = orders,
                 TotalCount = totalCount

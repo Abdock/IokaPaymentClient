@@ -22,18 +22,17 @@ public record CardPaymentByNewCard
     public required string Cvc { get; init; }
 
     [JsonPropertyName("holder")]
-    public required string Holder { get; init; }
+    public string Holder { get; init; } = string.Empty;
 
     [JsonPropertyName("save")]
     public bool Save { get; init; } = false;
 
     [JsonPropertyName("email")]
-    [EmailAddress]
-    public required string Email { get; init; }
+    public string Email { get; init; } = string.Empty;
 
     [JsonPropertyName("phone")]
     [RegularExpression(IokaRegexConstants.PhoneRegex, ErrorMessage = "Phone in incorrect format")]
-    public required string Phone { get; init; }
+    public string Phone { get; init; } = string.Empty;
 
     [JsonPropertyName("channel")]
     public required MasterPassChannel Channel { get; init; }

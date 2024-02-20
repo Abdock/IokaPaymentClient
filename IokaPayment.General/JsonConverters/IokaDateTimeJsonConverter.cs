@@ -2,7 +2,6 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using IokaPayment.General.Constants;
-using IokaPayment.General.Extensions;
 
 namespace IokaPayment.General.JsonConverters;
 
@@ -15,14 +14,12 @@ public class IokaDateTimeJsonConverter : JsonConverter<DateTimeOffset>
         if (!DateTimeOffset.TryParseExact(date, validDateTimeFormat, null, DateTimeStyles.None, out var datetime) && !DateTimeOffset.TryParse(date, out datetime))
             throw new ArgumentException("Date format is invalid format, it should be in RFC3339 format");
 
-        return datetime;
+        // Ioka returns datetime in UTC, so we need to recreate a new DateTimeOffset with the correct offset, because TryParseExact mark it as local time
+        return new DateTimeOffset(datetime.DateTime, TimeSpan.Zero);
     }
 
     public override void Write(Utf8JsonWriter writer, DateTimeOffset value, JsonSerializerOptions options)
     {
-        if (!value.IsUtcDateTime())
-            throw new ArgumentException("The date time must be in UTC+0 format.");
-
         writer.WriteStringValue(value.UtcDateTime.ToString(FormatConstants.DateTimeFormat).TrimEnd('Z'));
     }
 }

@@ -1,8 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Reflection;
+using System.Text.Json;
 using IokaPayment.General.Attributes;
 using IokaPayment.General.Constants;
 using IokaPayment.General.Enums;
+using IokaPayment.General.Extensions;
 
 namespace IokaPayment.General.Requests;
 
@@ -56,13 +58,9 @@ public abstract record PaginationQuery
                 return current;
             }
 
-            var stringValue = value.ToString();
-            if (value is DateTimeOffset date)
-            {
-                stringValue = date.ToString(FormatConstants.DateTimeFormat);
-            }
+            var stringValue = JsonSerializer.Serialize(value, JsonStringExtensions.SerializationOptions);
 
-            return $"{current}{title.ToLowerInvariant()}={stringValue}&";
+            return $"{current}{title.ToLowerInvariant()}={stringValue.Trim('"')}&";
         }).TrimEnd('&');
         return beginQuery ? $"?{query}" : query;
     }
