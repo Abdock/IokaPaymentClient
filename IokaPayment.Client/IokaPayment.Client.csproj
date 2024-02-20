@@ -7,8 +7,13 @@
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageId>IokaPayment.DependencyInjection</PackageId>
         <Title>Ioka payment client</Title>
-        <Authors>Abdussattar Kassymbekov</Authors>
-        <Version>1.0.2</Version>
+        <Authors>Abosh</Authors>
+        <Version>1.0.3-alpha</Version>
+        <Description>Ioka payment DI project</Description>
+        <PackageLicenseUrl>https://github.com/Abdock/IokaPaymentClient?tab=MIT-1-ov-file#readme </PackageLicenseUrl>
+        <RepositoryUrl>https://github.com/Abdock/IokaPaymentClient </RepositoryUrl>
+        <PackageTags>Ioka</PackageTags>
+        <PackageReleaseNotes>Fixed some bugs and change .NET version</PackageReleaseNotes>
     </PropertyGroup>
 
     <ItemGroup>
@@ -21,7 +26,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="Microsoft.Extensions.Http" Version="8.0.0" />
+      <PackageReference Include="Microsoft.Extensions.Http" Version="7.0.0" />
     </ItemGroup>
 
 </Project>

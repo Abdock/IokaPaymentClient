@@ -5,6 +5,14 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <Version>1.0.1-alpha</Version>
+        <Title>IokaPayment.Orders</Title>
+        <Authors>Abosh</Authors>
+        <Description>Orders module of Ioka payment system</Description>
+        <PackageLicenseUrl>https://github.com/Abdock/IokaPaymentClient?tab=MIT-1-ov-file#readme</PackageLicenseUrl>
+        <RepositoryUrl>https://github.com/Abdock/IokaPaymentClient</RepositoryUrl>
+        <PackageTags>Ioka</PackageTags>
+        <PackageReleaseNotes>Change .NET version to .NET 7.0</PackageReleaseNotes>
     </PropertyGroup>
 
     <ItemGroup>
