@@ -27,7 +27,7 @@ public record OrderData
     public required string Mcc { get; init; }
 
     [JsonPropertyName("extra_info")]
-    public dynamic? ExtraInfo { get; init; }
+    public dynamic ExtraInfo { get; init; } = new object();
 
     [JsonPropertyName("attempts")]
     [Range(1, 50, ErrorMessage = "Attempts must be between 1 and 50")]
@@ -43,15 +43,18 @@ public record OrderData
     public required string CardId { get; init; }
 
     [JsonPropertyName("back_url")]
-    [Range(1, 2083, ErrorMessage = "Back URL must be between 1 and 2083")]
+    [MinLength(1, ErrorMessage = "URL must be between 1 and 2083")]
+    [MaxLength(2083, ErrorMessage = "URL must be between 1 and 2083")]
     public required string BackUrl { get; init; }
 
     [JsonPropertyName("success_url")]
-    [Range(1, 2083, ErrorMessage = "Success URL must be between 1 and 2083")]
+    [MinLength(1, ErrorMessage = "URL must be between 1 and 2083")]
+    [MaxLength(2083, ErrorMessage = "URL must be between 1 and 2083")]
     public required string SuccessUrl { get; init; }
 
     [JsonPropertyName("failure_url")]
-    [Range(1, 2083, ErrorMessage = "Failure URL must be between 1 and 2083")]
+    [MinLength(1, ErrorMessage = "URL must be between 1 and 2083")]
+    [MaxLength(2083, ErrorMessage = "URL must be between 1 and 2083")]
     public required string FailureUrl { get; init; }
 
     [JsonPropertyName("template")]

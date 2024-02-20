@@ -15,19 +15,19 @@ public record CreateSubscription
     public required int Amount { get; init; }
 
     [JsonPropertyName("currency")]
-    public required Currency Currency { get; init; }
+    public Currency Currency { get; init; } = Currency.Kzt;
 
     [JsonPropertyName("description")]
     public string Description { get; init; } = string.Empty;
 
     [JsonPropertyName("extra_info")]
-    public dynamic? ExtraInfo { get; init; }
+    public dynamic ExtraInfo { get; init; } = new object();
 
     [JsonPropertyName("next_pay")]
     public required DateTimeOffset NextPay { get; init; }
 
     [JsonPropertyName("step")]
-    public required int Step { get; init; }
+    public int Step { get; init; } = 1;
 
     [JsonPropertyName("unit")]
     public required SubscriptionScheduleUnit Unit { get; init; }

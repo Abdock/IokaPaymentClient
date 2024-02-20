@@ -13,6 +13,6 @@ public record CaptureOrderRequest
     public required int Amount { get; init; }
 
     [JsonPropertyName("reason")]
-    [StringLength(255)]
+    [MaxLength(255)]
     public string Reason { get; init; } = string.Empty;
 }

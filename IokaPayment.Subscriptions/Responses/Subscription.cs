@@ -22,7 +22,7 @@ public record Subscription
     public string Description { get; init; } = string.Empty;
 
     [JsonPropertyName("extra_info")]
-    public dynamic? ExtraInfo { get; init; }
+    public dynamic ExtraInfo { get; init; } = new object();
 
     [JsonPropertyName("payer")]
     public required Payer Payer { get; init; }

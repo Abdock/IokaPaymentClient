@@ -6,7 +6,7 @@ namespace IokaPayment.General.Extensions;
 
 public static class JsonStringExtensions
 {
-    private static readonly JsonSerializerOptions SerializationOptions;
+    public static readonly JsonSerializerOptions SerializationOptions;
 
     static JsonStringExtensions()
     {

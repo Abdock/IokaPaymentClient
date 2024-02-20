@@ -38,7 +38,26 @@ public class IokaPayments : IPayments
         return error;
     }
 
-    public async Task<Response<OrderPayment>> CreateCardPaymentAsync(CardPayment cardPayment, CancellationToken cancellationToken = default)
+    public async Task<Response<OrderPayment>> CreateCardPaymentAsync(CardPaymentByNewCard cardPayment, CancellationToken cancellationToken = default)
+    {
+        cardPayment.ThrowIfValidationFailed();
+        var uri = $"{_configuration.Host}/orders/{cardPayment.OrderId}/payments/card";
+        using var request = new HttpRequestMessage(HttpMethod.Post, uri);
+        request.AddApiKey(_configuration.ApiKey);
+        using var response = await _httpClient.SendAsync(request, cancellationToken);
+        var json = await response.Content.ReadAsStringAsync(cancellationToken);
+        if (response.IsSuccessStatusCode)
+        {
+            var payment = json.DeserializeFromJson<OrderPayment>();
+            return payment;
+        }
+
+        var error = json.DeserializeFromJson<ErrorResponse>();
+        _logger.LogError("Sent POST request to {Uri}, and received error {ErrorJson}", uri, json);
+        return error;
+    }
+
+    public async Task<Response<OrderPayment>> CreateCardPaymentAsync(CardPaymentBySavedCard cardPayment, CancellationToken cancellationToken = default)
     {
         cardPayment.ThrowIfValidationFailed();
         var uri = $"{_configuration.Host}/orders/{cardPayment.OrderId}/payments/card";

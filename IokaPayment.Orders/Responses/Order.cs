@@ -33,7 +33,7 @@ public record Order
     public required string Description { get; init; }
 
     [JsonPropertyName("extra_info")]
-    public dynamic? ExtraInfo { get; init; }
+    public dynamic ExtraInfo { get; init; } = new object();
 
     [JsonPropertyName("attempts")]
     public required int Attempts { get; init; }

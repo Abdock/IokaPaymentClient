@@ -4,7 +4,7 @@ using IokaPayment.General.Enums;
 
 namespace IokaPayment.Payments.Requests;
 
-public record CardPayment
+public record CardPaymentByNewCard
 {
     [JsonIgnore]
     public required string OrderId { get; init; }
@@ -25,23 +25,15 @@ public record CardPayment
     public required string Holder { get; init; }
 
     [JsonPropertyName("save")]
-    public required bool Save { get; init; }
+    public bool Save { get; init; } = false;
 
     [JsonPropertyName("email")]
+    [EmailAddress]
     public required string Email { get; init; }
 
     [JsonPropertyName("phone")]
     [RegularExpression(IokaRegexConstants.PhoneRegex, ErrorMessage = "Phone in incorrect format")]
     public required string Phone { get; init; }
-
-    [JsonPropertyName("card_id")]
-    public required string CardId { get; init; }
-
-    [JsonPropertyName("fingerprint")]
-    public required string Fingerprint { get; init; }
-
-    [JsonPropertyName("phone_check_date")]
-    public required DateTimeOffset PhoneCheckDate { get; init; }
 
     [JsonPropertyName("channel")]
     public required MasterPassChannel Channel { get; init; }

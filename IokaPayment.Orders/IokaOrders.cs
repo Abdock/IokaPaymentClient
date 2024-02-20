@@ -1,4 +1,5 @@
 ﻿using System.Net.Http.Json;
+using System.Text.Json;
 using IokaPayment.General.Models;
 using IokaPayment.Orders.Requests;
 using IokaPayment.Orders.Responses;
@@ -24,7 +25,7 @@ public class IokaOrders : IOrders
         data.ThrowIfValidationFailed();
         var uri = $"{_configuration.Host}/orders";
         using var request = new HttpRequestMessage(HttpMethod.Post, uri);
-        request.Content = JsonContent.Create(data);
+        request.Content = JsonContent.Create(data, options: JsonStringExtensions.SerializationOptions);
         request.AddApiKey(_configuration.ApiKey);
         using var response = await _httpClient.SendAsync(request, cancellationToken);
         var json = await response.Content.ReadAsStringAsync(cancellationToken);
