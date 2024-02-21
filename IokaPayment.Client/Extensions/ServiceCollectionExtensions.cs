@@ -13,7 +13,8 @@ public static class ServiceCollectionExtensions
         {
             Assembly.Load("IokaPayment.General"), Assembly.Load("IokaPayment.Orders"),
             Assembly.Load("IokaPayment.Payments"), Assembly.Load("IokaPayment.Refunds"),
-            Assembly.Load("IokaPayment.Subscriptions"), Assembly.Load("IokaPayment.Customers"), 
+            Assembly.Load("IokaPayment.Subscriptions"), Assembly.Load("IokaPayment.Customers"),
+            Assembly.Load("IokaPayment.Cards")
         };
         var iokaServices = assemblies
             .SelectMany(e=>e.DefinedTypes)
