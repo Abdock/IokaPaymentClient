@@ -1,10 +1,9 @@
 ﻿using System.Text.Json.Serialization;
 using IokaPayment.General.Enums;
-using IokaPayment.General.Models;
 
-namespace IokaPayment.Accounts.Responses;
+namespace IokaPayment.General.Models;
 
-public record AccountResponse
+public record Account
 {
     [JsonPropertyName("id")]
     public required string Id { get; init; }

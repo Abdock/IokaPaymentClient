@@ -2,5 +2,5 @@
 
 public class FormatConstants
 {
-    public const string DateTimeFormat = @"yyyy\-MM\-dd\THH\:mm\:ss\Z";
+    public const string IokaDateTimeFormat = @"yyyy\-MM\-dd\THH\:mm\:ss"; 
 }

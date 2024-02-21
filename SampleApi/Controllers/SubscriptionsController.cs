@@ -14,7 +14,19 @@ public class SubscriptionsController : ControllerBase
     {
         _subscriptions = subscriptions;
     }
-    
+
+    [HttpGet]
+    public async Task<IActionResult> GetSubscriptionsAsync()
+    {
+        var query = new SubscriptionsPaginationQuery
+        {
+            Page = 1,
+            Limit = 10
+        };
+        var result = await _subscriptions.GetSubscriptionsAsync(query);
+        return Ok(result.IsSuccess ? result.Result : result.Error);
+    }
+
     [HttpPost]
     public async Task<IActionResult> CreateSubscription([FromBody] CreateSubscription request)
     {

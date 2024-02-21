@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using System.Net.Http.Json;
+using Microsoft.Extensions.Logging;
 
 namespace IokaPayment.Payments;
 
@@ -43,6 +44,7 @@ public class IokaPayments : IPayments
         cardPayment.ThrowIfValidationFailed();
         var uri = $"{_configuration.Host}/orders/{cardPayment.OrderId}/payments/card";
         using var request = new HttpRequestMessage(HttpMethod.Post, uri);
+        request.Content = JsonContent.Create(cardPayment, options: JsonStringExtensions.SerializationOptions);
         request.AddApiKey(_configuration.ApiKey);
         using var response = await _httpClient.SendAsync(request, cancellationToken);
         var json = await response.Content.ReadAsStringAsync(cancellationToken);
@@ -62,6 +64,7 @@ public class IokaPayments : IPayments
         cardPayment.ThrowIfValidationFailed();
         var uri = $"{_configuration.Host}/orders/{cardPayment.OrderId}/payments/card";
         using var request = new HttpRequestMessage(HttpMethod.Post, uri);
+        request.Content = JsonContent.Create(cardPayment, options: JsonStringExtensions.SerializationOptions);
         request.AddApiKey(_configuration.ApiKey);
         using var response = await _httpClient.SendAsync(request, cancellationToken);
         var json = await response.Content.ReadAsStringAsync(cancellationToken);
@@ -81,6 +84,7 @@ public class IokaPayments : IPayments
         toolPayment.ThrowIfValidationFailed();
         var uri = $"{_configuration.Host}/orders/{toolPayment.OrderId}/payments/tool";
         using var request = new HttpRequestMessage(HttpMethod.Post, uri);
+        request.Content = JsonContent.Create(toolPayment, options: JsonStringExtensions.SerializationOptions);
         request.AddApiKey(_configuration.ApiKey);
         using var response = await _httpClient.SendAsync(request, cancellationToken);
         var json = await response.Content.ReadAsStringAsync(cancellationToken);

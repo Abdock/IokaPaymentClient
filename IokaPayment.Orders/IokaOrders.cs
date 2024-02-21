@@ -103,7 +103,7 @@ public class IokaOrders : IOrders
         captureRequest.ThrowIfValidationFailed();
         var uri = $"{_configuration.Host}/orders/{captureRequest.OrderId}/capture";
         using var request = new HttpRequestMessage(HttpMethod.Post, uri);
-        request.Content = JsonContent.Create(captureRequest);
+        request.Content = JsonContent.Create(captureRequest, options: JsonStringExtensions.SerializationOptions);
         request.AddApiKey(_configuration.ApiKey);
         using var response = await _httpClient.SendAsync(request, cancellationToken);
         var json = await response.Content.ReadAsStringAsync(cancellationToken);
@@ -122,7 +122,7 @@ public class IokaOrders : IOrders
         cancelRequest.ThrowIfValidationFailed();
         var uri = $"{_configuration.Host}/orders/{cancelRequest.OrderId}/cancel";
         using var request = new HttpRequestMessage(HttpMethod.Post, uri);
-        request.Content = JsonContent.Create(cancelRequest);
+        request.Content = JsonContent.Create(cancelRequest, options: JsonStringExtensions.SerializationOptions);
         request.AddApiKey(_configuration.ApiKey);
         using var response = await _httpClient.SendAsync(request, cancellationToken);
         var json = await response.Content.ReadAsStringAsync(cancellationToken);

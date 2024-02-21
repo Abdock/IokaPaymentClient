@@ -20,6 +20,6 @@ public class IokaDateTimeJsonConverter : JsonConverter<DateTimeOffset>
 
     public override void Write(Utf8JsonWriter writer, DateTimeOffset value, JsonSerializerOptions options)
     {
-        writer.WriteStringValue(value.UtcDateTime.ToString(FormatConstants.DateTimeFormat).TrimEnd('Z'));
+        writer.WriteStringValue(value.UtcDateTime.ToString(FormatConstants.IokaDateTimeFormat).TrimEnd('Z'));
     }
 }

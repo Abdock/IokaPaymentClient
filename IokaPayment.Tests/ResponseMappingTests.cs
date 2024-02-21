@@ -1,5 +1,5 @@
-using IokaPayment.Accounts.Responses;
 using IokaPayment.General.Extensions;
+using IokaPayment.General.Models;
 using IokaPayment.Orders.Responses;
 using IokaPayment.Refunds.Responses;
 
@@ -35,10 +35,10 @@ public class Tests
                               "external_id": "string"
                             }
                             """;
-        AccountResponse? account = default;
+        Account? account = default;
         Assert.DoesNotThrow(() =>
         {
-            account = json.DeserializeFromJson<AccountResponse>();
+            account = json.DeserializeFromJson<Account>();
         });
         Assert.That(account, Is.Not.Null);
     }

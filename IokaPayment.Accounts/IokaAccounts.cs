@@ -1,6 +1,6 @@
-﻿using IokaPayment.Accounts.Responses;
-using IokaPayment.General.Configuration;
+﻿using IokaPayment.General.Configuration;
 using IokaPayment.General.Extensions;
+using IokaPayment.General.Models;
 using IokaPayment.General.Responses;
 using Microsoft.Extensions.Logging;
 
@@ -19,7 +19,7 @@ public class IokaAccounts : IAccounts
         _logger = logger;
     }
 
-    public async Task<Response<IReadOnlyCollection<AccountResponse>>> GetAccountsAsync(CancellationToken cancellationToken = default)
+    public async Task<Response<IReadOnlyCollection<Account>>> GetAccountsAsync(CancellationToken cancellationToken = default)
     {
         var uri = $"{_configuration.Host}/accounts";
         using var request = new HttpRequestMessage(HttpMethod.Get, uri);
@@ -28,7 +28,7 @@ public class IokaAccounts : IAccounts
         var json = await response.Content.ReadAsStringAsync(cancellationToken);
         if (response.IsSuccessStatusCode)
         {
-            return json.DeserializeFromJson<List<AccountResponse>>();
+            return json.DeserializeFromJson<List<Account>>();
         }
 
         var error = json.DeserializeFromJson<ErrorResponse>();
@@ -36,7 +36,7 @@ public class IokaAccounts : IAccounts
         return error;
     }
 
-    public async Task<Response<AccountResponse>> GetAccountAsync(string accountId, CancellationToken cancellationToken = default)
+    public async Task<Response<Account>> GetAccountAsync(string accountId, CancellationToken cancellationToken = default)
     {
         var uri = $"{_configuration.Host}/accounts/{accountId}";
         using var request = new HttpRequestMessage(HttpMethod.Get, uri);
@@ -45,7 +45,7 @@ public class IokaAccounts : IAccounts
         var json = await response.Content.ReadAsStringAsync(cancellationToken);
         if (response.IsSuccessStatusCode)
         {
-            return json.DeserializeFromJson<AccountResponse>();
+            return json.DeserializeFromJson<Account>();
         }
 
         var error = json.DeserializeFromJson<ErrorResponse>();

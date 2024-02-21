@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using System.Net.Http.Json;
+using Microsoft.Extensions.Logging;
 
 namespace IokaPayment.Subscriptions;
 
@@ -43,6 +44,7 @@ public class IokaSubscriptions : ISubscriptions
         query.ThrowIfValidationFailed();
         var uri = $"{_configuration.Host}/subscriptions";
         using var request = new HttpRequestMessage(HttpMethod.Post, uri);
+        request.Content = JsonContent.Create(query, options: JsonStringExtensions.SerializationOptions);
         request.AddApiKey(_configuration.ApiKey);
         using var response = await _httpClient.SendAsync(request, cancellationToken);
         var json = await response.Content.ReadAsStringAsync(cancellationToken);
