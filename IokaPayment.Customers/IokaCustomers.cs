@@ -63,7 +63,7 @@ public class IokaCustomers : ICustomers
         return error;
     }
 
-    public async Task<Response<Customer>> CreateCustomerAsync(CreateCustomer query, CancellationToken cancellationToken = default)
+    public async Task<Response<CreatedCustomer>> CreateCustomerAsync(CreateCustomer query, CancellationToken cancellationToken = default)
     {
         query.ThrowIfValidationFailed();
         var uri = $"{_configuration.Host}/customers";
@@ -74,7 +74,7 @@ public class IokaCustomers : ICustomers
         var json = await response.Content.ReadAsStringAsync(cancellationToken);
         if (response.IsSuccessStatusCode)
         {
-            return json.DeserializeFromJson<Customer>();
+            return json.DeserializeFromJson<CreatedCustomer>();
         }
 
         var error = json.DeserializeFromJson<ErrorResponse>();

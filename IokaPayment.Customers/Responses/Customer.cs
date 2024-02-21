@@ -25,7 +25,7 @@ public record Customer
     public string Phone { get; init; } = string.Empty;
 
     [JsonPropertyName("accounts")]
-    public required IReadOnlyCollection<Account> Accounts { get; init; } = new List<Account>();
+    public IReadOnlyCollection<Account> Accounts { get; init; } = new List<Account>();
 
     [JsonPropertyName("checkout_url")]
     public required Uri CheckoutUrl { get; init; }
