@@ -17,7 +17,7 @@ public class OrdersController : ControllerBase
     }
     
     [HttpPost]
-    public async Task<IActionResult> Create([FromBody] OrderData request)
+    public async Task<IActionResult> Create([FromBody] CreateOrderRequest request)
     {
         var orderId = await _orders.CreateOrderAsync(request);
         return Ok(orderId.IsSuccess ? orderId.Result : orderId.Error);

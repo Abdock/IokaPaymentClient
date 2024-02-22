@@ -58,7 +58,7 @@ public class IokaCards : ICards
     {
         var uri = $"{_configuration.Host}/customers/{query.CustomerId}/bindings";
         using var request = new HttpRequestMessage(HttpMethod.Post, uri);
-        request.Content = JsonContent.Create(query.Request, options: JsonStringExtensions.SerializationOptions);
+        request.Content = JsonContent.Create(query.Body, options: JsonStringExtensions.SerializationOptions);
         request.AddApiKey(_configuration.ApiKey).AddCustomerAccessToken(query.AccessToken);
         using var response = await _client.SendAsync(request, cancellationToken);
         var json = await response.Content.ReadAsStringAsync(cancellationToken);

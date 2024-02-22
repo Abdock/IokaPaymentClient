@@ -22,8 +22,8 @@ public record OrderRefund
     public required DateTimeOffset CreatedAt { get; init; }
 
     [JsonPropertyName("error")]
-    public required ErrorResponse Error { get; init; }
+    public ErrorResponse? Error { get; init; }
 
     [JsonPropertyName("acquirer")]
-    public required Acquirer Acquirer { get; init; }
+    public Acquirer? Acquirer { get; init; }
 }

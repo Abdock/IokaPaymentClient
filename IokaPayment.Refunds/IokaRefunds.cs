@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using System.Net.Http.Json;
+using Microsoft.Extensions.Logging;
 
 namespace IokaPayment.Refunds;
 
@@ -32,16 +33,18 @@ public class IokaRefunds : IRefunds
         return error;
     }
 
-    public async Task<Response<RefundedOrder>> RefundOrderAsync(string orderId, CancellationToken cancellationToken = default)
+    public async Task<Response<OrderRefund>> RefundOrderAsync(RefundOrderRequest query, CancellationToken cancellationToken = default)
     {
-        var uri = $"{_configuration.Host}/orders/{orderId}/refunds";
+        query.ThrowIfValidationFailed();
+        var uri = $"{_configuration.Host}/orders/{query.OrderId}/refunds";
         using var request = new HttpRequestMessage(HttpMethod.Post, uri);
+        request.Content = JsonContent.Create(query.Body, options: JsonStringExtensions.SerializationOptions);
         request.AddApiKey(_configuration.ApiKey);
         using var response = await _httpClient.SendAsync(request, cancellationToken);
         var json = await response.Content.ReadAsStringAsync(cancellationToken);
         if (response.IsSuccessStatusCode)
         {
-            return json.DeserializeFromJson<RefundedOrder>();
+            return json.DeserializeFromJson<OrderRefund>();
         }
 
         var error = json.DeserializeFromJson<ErrorResponse>();

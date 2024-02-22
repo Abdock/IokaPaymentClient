@@ -1,5 +1,4 @@
 ﻿using System.Net.Http.Json;
-using System.Text.Json;
 using IokaPayment.General.Models;
 using IokaPayment.Orders.Requests;
 using IokaPayment.Orders.Responses;
@@ -20,12 +19,12 @@ public class IokaOrders : IOrders
         _logger = logger;
     }
 
-    public async Task<Response<CreatedOrder>> CreateOrderAsync(OrderData data, CancellationToken cancellationToken = default)
+    public async Task<Response<CreatedOrder>> CreateOrderAsync(CreateOrderRequest query, CancellationToken cancellationToken = default)
     {
-        data.ThrowIfValidationFailed();
+        query.ThrowIfValidationFailed();
         var uri = $"{_configuration.Host}/orders";
         using var request = new HttpRequestMessage(HttpMethod.Post, uri);
-        request.Content = JsonContent.Create(data, options: JsonStringExtensions.SerializationOptions);
+        request.Content = JsonContent.Create(query, options: JsonStringExtensions.SerializationOptions);
         request.AddApiKey(_configuration.ApiKey);
         using var response = await _httpClient.SendAsync(request, cancellationToken);
         var json = await response.Content.ReadAsStringAsync(cancellationToken);
@@ -84,7 +83,7 @@ public class IokaOrders : IOrders
         updateRequest.ThrowIfValidationFailed();
         var uri = $"{_configuration.Host}/orders/{updateRequest.OrderId}";
         using var request = new HttpRequestMessage(HttpMethod.Patch, uri);
-        request.Content = JsonContent.Create(updateRequest);
+        request.Content = JsonContent.Create(updateRequest.Body, options: JsonStringExtensions.SerializationOptions);
         request.AddApiKey(_configuration.ApiKey);
         using var response = await _httpClient.SendAsync(request, cancellationToken);
         var json = await response.Content.ReadAsStringAsync(cancellationToken);
@@ -103,7 +102,7 @@ public class IokaOrders : IOrders
         captureRequest.ThrowIfValidationFailed();
         var uri = $"{_configuration.Host}/orders/{captureRequest.OrderId}/capture";
         using var request = new HttpRequestMessage(HttpMethod.Post, uri);
-        request.Content = JsonContent.Create(captureRequest, options: JsonStringExtensions.SerializationOptions);
+        request.Content = JsonContent.Create(captureRequest.Body, options: JsonStringExtensions.SerializationOptions);
         request.AddApiKey(_configuration.ApiKey);
         using var response = await _httpClient.SendAsync(request, cancellationToken);
         var json = await response.Content.ReadAsStringAsync(cancellationToken);
@@ -122,7 +121,7 @@ public class IokaOrders : IOrders
         cancelRequest.ThrowIfValidationFailed();
         var uri = $"{_configuration.Host}/orders/{cancelRequest.OrderId}/cancel";
         using var request = new HttpRequestMessage(HttpMethod.Post, uri);
-        request.Content = JsonContent.Create(cancelRequest, options: JsonStringExtensions.SerializationOptions);
+        request.Content = JsonContent.Create(cancelRequest.Body, options: JsonStringExtensions.SerializationOptions);
         request.AddApiKey(_configuration.ApiKey);
         using var response = await _httpClient.SendAsync(request, cancellationToken);
         var json = await response.Content.ReadAsStringAsync(cancellationToken);

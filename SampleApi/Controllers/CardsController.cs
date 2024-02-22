@@ -23,13 +23,13 @@ public class CardsController : ControllerBase
     }
     
     [HttpPost]
-    public async Task<IActionResult> CreateCustomerCard([FromQuery] string customerId, [FromQuery] string accessToken, [FromBody] CreateCardRequest request)
+    public async Task<IActionResult> CreateCustomerCard([FromQuery] string customerId, [FromQuery] string accessToken, [FromBody] CardBody body)
     {
         var query = new BindCardRequest
         {
             CustomerId = customerId,
             AccessToken = accessToken,
-            Request = request
+            Body = body
         };
         var response = await _cards.BindCardAsync(query);
         return Ok(response.IsSuccess ? response.Result : response.Error);

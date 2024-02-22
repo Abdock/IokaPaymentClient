@@ -4,7 +4,7 @@ using IokaPayment.General.Constants;
 
 namespace IokaPayment.Cards.Requests;
 
-public record CreateCardRequest
+public record CardBody
 {
     [JsonPropertyName("pan")]
     [RegularExpression(IokaRegexConstants.PanRegex)]

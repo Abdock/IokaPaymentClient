@@ -4,5 +4,5 @@ public record BindCardRequest
 {
     public required string CustomerId { get; init; }
     public required string AccessToken { get; init; }
-    public required CreateCardRequest Request { get; init; }
+    public required CardBody Body { get; init; }
 }

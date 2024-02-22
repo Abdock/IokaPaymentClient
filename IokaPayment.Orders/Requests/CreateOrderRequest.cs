@@ -4,7 +4,7 @@ using IokaPayment.General.Enums;
 
 namespace IokaPayment.Orders.Requests;
 
-public record OrderData
+public record CreateOrderRequest
 {
     [JsonPropertyName("amount")]
     [Range(100, int.MaxValue)]

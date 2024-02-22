@@ -8,5 +8,5 @@ public record Acquirer
     public required string Name { get; init; }
 
     [JsonPropertyName("reference")]
-    public required string Reference { get; init; }
+    public string Reference { get; init; } = string.Empty;
 }

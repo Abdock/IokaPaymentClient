@@ -1,15 +1,17 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 using IokaPayment.General.Models;
 
-namespace IokaPayment.Refunds.Responses;
+namespace IokaPayment.Refunds.Requests;
 
-public record RefundedOrder
+public record RefundBody
 {
     [JsonPropertyName("amount")]
-    public required int Amount { get; set; }
+    public required int Amount { get; init; }
 
     [JsonPropertyName("reason")]
-    public required string Reason { get; set; }
+    [MaxLength(255)]
+    public string Reason { get; init; } = string.Empty;
 
     [JsonPropertyName("rules")]
     public IReadOnlyCollection<RefundRule> Rules { get; init; } = new List<RefundRule>();

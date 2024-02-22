@@ -82,6 +82,7 @@ public class IokaSubscriptions : ISubscriptions
         query.ThrowIfValidationFailed();
         var uri = $"{_configuration.Host}/subscriptions/{query.SubscriptionId}";
         using var request = new HttpRequestMessage(HttpMethod.Put, uri);
+        request.Content = JsonContent.Create(query.Body, options: JsonStringExtensions.SerializationOptions);
         request.AddApiKey(_configuration.ApiKey);
         using var response = await _httpClient.SendAsync(request, cancellationToken);
         var json = await response.Content.ReadAsStringAsync(cancellationToken);

@@ -27,11 +27,11 @@ public record Payer
     public required string Emitter { get; init; }
 
     [JsonPropertyName("email")]
-    public required string Email { get; init; }
+    public string Email { get; init; } = string.Empty;
 
     [JsonPropertyName("phone")]
     [RegularExpression(@"^\+\d{4,15}$")]
-    public required string Phone { get; init; }
+    public string Phone { get; init; } = string.Empty;
 
     [JsonPropertyName("customer_id")]
     public required string CustomerId { get; init; }

@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace IokaPayment.Refunds.Responses;
+namespace IokaPayment.Refunds.Requests;
 
 public record RefundRule
 {
