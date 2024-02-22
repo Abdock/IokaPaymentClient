@@ -8,9 +8,8 @@
         <PackageId>IokaPayment.DependencyInjection</PackageId>
         <Title>Ioka payment client</Title>
         <Authors>Abosh</Authors>
-        <Version>1.0.3-alpha</Version>
+        <Version>1.0.3-beta</Version>
         <Description>Ioka payment DI project</Description>
-        <PackageLicenseUrl>https://github.com/Abdock/IokaPaymentClient?tab=MIT-1-ov-file#readme </PackageLicenseUrl>
         <RepositoryUrl>https://github.com/Abdock/IokaPaymentClient </RepositoryUrl>
         <PackageTags>Ioka</PackageTags>
         <PackageReleaseNotes>Fixed some bugs and change .NET version</PackageReleaseNotes>

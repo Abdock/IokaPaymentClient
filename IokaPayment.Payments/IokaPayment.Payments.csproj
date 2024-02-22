@@ -5,14 +5,13 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <Version>1.0.1-alpha</Version>
+        <Version>1.0.1-beta</Version>
         <Title>IokaPayment.Payments</Title>
         <Authors>Abosh</Authors>
-        <Description>Payments module of Ioka payment system  </Description>
-        <PackageLicenseUrl>https://github.com/Abdock/IokaPaymentClient?tab=MIT-1-ov-file#readme</PackageLicenseUrl>
+        <Description>Payments module of Ioka payment system</Description>
         <RepositoryUrl>https://github.com/Abdock/IokaPaymentClient</RepositoryUrl>
         <PackageTags>Ioka</PackageTags>
-        <PackageReleaseNotes>Change .NET version to .NET 7.0</PackageReleaseNotes>
+        <PackageReleaseNotes>Separate models for body and route</PackageReleaseNotes>
     </PropertyGroup>
 
     <ItemGroup>

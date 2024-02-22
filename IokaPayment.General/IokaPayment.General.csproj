@@ -6,11 +6,10 @@
         <Nullable>enable</Nullable>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <LangVersion>12</LangVersion>
-        <Version>1.0.1-alpha</Version>
+        <Version>1.0.1</Version>
         <Title>IokaPayment.Core</Title>
         <Authors>Abosh</Authors>
         <Description>Core models, enums and helpers for other modules</Description>
-        <PackageLicenseUrl>https://github.com/Abdock/IokaPaymentClient?tab=MIT-1-ov-file#readme</PackageLicenseUrl>
         <RepositoryUrl>https://github.com/Abdock/IokaPaymentClient</RepositoryUrl>
         <PackageTags>Ioka</PackageTags>
         <PackageReleaseNotes>Change .NET version to .NET 7.0</PackageReleaseNotes>
