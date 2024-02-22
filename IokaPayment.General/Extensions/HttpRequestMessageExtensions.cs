@@ -9,4 +9,10 @@ public static class HttpRequestMessageExtensions
         request.Headers.Add(HttpHeaderConstants.ApiKey, apiKey);
         return request;
     }
+
+    public static HttpRequestMessage AddCustomerAccessToken(this HttpRequestMessage request, string accessToken)
+    {
+        request.Headers.Add(HttpHeaderConstants.CustomerAccessToken, accessToken);
+        return request;
+    }
 }
