@@ -4,11 +4,8 @@ using IokaPayment.General.Constants;
 
 namespace IokaPayment.Cards.Requests;
 
-public record CreateAndBindCardRequest
+public record CreateCardRequest
 {
-    [JsonIgnore]
-    public required string CustomerId { get; init; }
-
     [JsonPropertyName("pan")]
     [RegularExpression(IokaRegexConstants.PanRegex)]
     public required string Pan { get; init; }

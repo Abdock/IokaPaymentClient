@@ -18,6 +18,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\IokaPayment.Accounts\IokaPayment.Accounts.csproj" />
+      <ProjectReference Include="..\IokaPayment.Cards\IokaPayment.Cards.csproj" />
       <ProjectReference Include="..\IokaPayment.Customers\IokaPayment.Customers.csproj" />
       <ProjectReference Include="..\IokaPayment.General\IokaPayment.General.csproj" />
       <ProjectReference Include="..\IokaPayment.Orders\IokaPayment.Orders.csproj" />

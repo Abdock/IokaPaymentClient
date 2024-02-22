@@ -54,11 +54,11 @@ public class IokaCards : ICards
         return error;
     }
 
-    public async Task<Response<CustomerCard>> CreateCustomerCardAsync(CreateAndBindCardRequest query, CancellationToken cancellationToken = default)
+    public async Task<Response<CustomerCard>> BindCardAsync(BindCardRequest query, CancellationToken cancellationToken = default)
     {
         var uri = $"{_configuration.Host}/customers/{query.CustomerId}/bindings";
         using var request = new HttpRequestMessage(HttpMethod.Post, uri);
-        request.Content = JsonContent.Create(query, options: JsonStringExtensions.SerializationOptions);
+        request.Content = JsonContent.Create(query.Request, options: JsonStringExtensions.SerializationOptions);
         request.AddApiKey(_configuration.ApiKey);
         using var response = await _client.SendAsync(request, cancellationToken);
         var json = await response.Content.ReadAsStringAsync(cancellationToken);
