@@ -1,4 +1,6 @@
 ﻿using System.Net.Http.Json;
+using System.Text.Json;
+using IokaPayment.General.Models;
 using Microsoft.Extensions.Logging;
 
 namespace IokaPayment.Subscriptions;
@@ -94,6 +96,44 @@ public class IokaSubscriptions : ISubscriptions
         
         var error = json.DeserializeFromJson<ErrorResponse>();
         _logger.LogError("Sent PUT request to {Uri}, and received error {ErrorJson}", uri, json);
+        return error;
+    }
+
+    public async Task<Response<Subscription>> UpdateSubscriptionAsync(UpdateSubscription query, CancellationToken cancellationToken = default)
+    {
+        query.Body.ThrowIfValidationFailed();
+        var uri = $"{_configuration.Host}/subscriptions/{query.SubscriptionId}";
+        using var request = new HttpRequestMessage(HttpMethod.Patch, uri);
+        request.Content = JsonContent.Create(query.Body, options: JsonStringExtensions.SerializationOptions);
+        request.AddApiKey(_configuration.ApiKey);
+        using var response = await _httpClient.SendAsync(request, cancellationToken);
+        var json = await response.Content.ReadAsStringAsync(cancellationToken);
+        if (response.IsSuccessStatusCode)
+        {
+            var subscription = json.DeserializeFromJson<Subscription>();
+            return subscription;
+        }
+        
+        var error = json.DeserializeFromJson<ErrorResponse>();
+        _logger.LogError("Sent PATCH request to {Uri}, and received error {ErrorJson}", uri, json);
+        return error;
+    }
+
+    public async Task<Response<IReadOnlyCollection<OrderPayment>>> GetSubscriptionPaymentsAsync(GetSubscriptionPaymentsQuery query, CancellationToken cancellationToken = default)
+    {
+        var uri = $"{_configuration.Host}/subscriptions/{query.SubscriptionId}/payments?{query.ToQueryString()}";
+        using var request = new HttpRequestMessage(HttpMethod.Get, uri);
+        request.AddApiKey(_configuration.ApiKey);
+        using var response = await _httpClient.SendAsync(request, cancellationToken);
+        var json = await response.Content.ReadAsStringAsync(cancellationToken);
+        if (response.IsSuccessStatusCode)
+        {
+            var payments = json.DeserializeFromJson<List<OrderPayment>>();
+            return payments;
+        }
+        
+        var error = json.DeserializeFromJson<ErrorResponse>();
+        _logger.LogError("Sent GET request to {Uri}, and received error {ErrorJson}", uri, json);
         return error;
     }
 }
