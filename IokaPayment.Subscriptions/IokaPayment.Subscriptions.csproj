@@ -5,13 +5,13 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <Version>1.0.1-beta</Version>
+        <Version>1.0.1</Version>
         <Title>IokaPayment.Subscriptions</Title>
         <Authors>Abosh</Authors>
         <Description>Subscriptions module of Ioka payment system</Description>
         <RepositoryUrl>https://github.com/Abdock/IokaPaymentClient </RepositoryUrl>
         <PackageTags>Ioka</PackageTags>
-        <PackageReleaseNotes>Separate models for body and route</PackageReleaseNotes>
+        <PackageReleaseNotes>Added methods to update existing subscription and get payments of subscription</PackageReleaseNotes>
     </PropertyGroup>
 
     <ItemGroup>

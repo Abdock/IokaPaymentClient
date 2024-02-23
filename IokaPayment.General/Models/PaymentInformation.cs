@@ -4,7 +4,7 @@ using IokaPayment.General.Responses;
 
 namespace IokaPayment.General.Models;
 
-public record OrderPayment
+public record PaymentInformation
 {
     [JsonPropertyName("id")]
     public required string Id { get; init; }
@@ -34,11 +34,11 @@ public record OrderPayment
     public required Payer Payer { get; init; }
 
     [JsonPropertyName("error")]
-    public required ErrorResponse Error { get; init; }
+    public ErrorResponse? Error { get; init; }
 
     [JsonPropertyName("acquirer")]
     public required Acquirer Acquirer { get; init; }
 
     [JsonPropertyName("action")]
-    public required PaymentAction Action { get; init; }
+    public PaymentAction? Action { get; init; }
 }

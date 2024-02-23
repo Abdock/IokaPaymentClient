@@ -9,5 +9,5 @@ public interface ISubscriptions
     Task<Response<Subscription>> GetSubscriptionByIdAsync(string subscriptionId, CancellationToken cancellationToken = default);
     Task<Response<Subscription>> ChangeSubscriptionStatusAsync(ChangeSubscriptionStatus query, CancellationToken cancellationToken = default);
     Task<Response<Subscription>> UpdateSubscriptionAsync(UpdateSubscription query, CancellationToken cancellationToken = default);
-    Task<Response<IReadOnlyCollection<OrderPayment>>> GetSubscriptionPaymentsAsync(GetSubscriptionPaymentsQuery query, CancellationToken cancellationToken = default);
+    Task<Response<IReadOnlyCollection<PaymentInformation>>> GetSubscriptionPaymentsAsync(GetSubscriptionPaymentsQuery query, CancellationToken cancellationToken = default);
 }

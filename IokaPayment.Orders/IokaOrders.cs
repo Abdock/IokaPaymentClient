@@ -97,7 +97,7 @@ public class IokaOrders : IOrders
         return error;
     }
 
-    public async Task<Response<OrderPayment>> CaptureOrderAsync(CaptureOrderRequest captureRequest, CancellationToken cancellationToken = default)
+    public async Task<Response<PaymentInformation>> CaptureOrderAsync(CaptureOrderRequest captureRequest, CancellationToken cancellationToken = default)
     {
         captureRequest.ThrowIfValidationFailed();
         var uri = $"{_configuration.Host}/orders/{captureRequest.OrderId}/capture";
@@ -108,7 +108,7 @@ public class IokaOrders : IOrders
         var json = await response.Content.ReadAsStringAsync(cancellationToken);
         if (response.IsSuccessStatusCode)
         {
-            return json.DeserializeFromJson<OrderPayment>();
+            return json.DeserializeFromJson<PaymentInformation>();
         }
 
         var error = json.DeserializeFromJson<ErrorResponse>();
@@ -116,7 +116,7 @@ public class IokaOrders : IOrders
         return error;
     }
 
-    public async Task<Response<OrderPayment>> CancelOrderAsync(CancelOrderRequest cancelRequest, CancellationToken cancellationToken = default)
+    public async Task<Response<PaymentInformation>> CancelOrderAsync(CancelOrderRequest cancelRequest, CancellationToken cancellationToken = default)
     {
         cancelRequest.ThrowIfValidationFailed();
         var uri = $"{_configuration.Host}/orders/{cancelRequest.OrderId}/cancel";
@@ -127,7 +127,7 @@ public class IokaOrders : IOrders
         var json = await response.Content.ReadAsStringAsync(cancellationToken);
         if (response.IsSuccessStatusCode)
         {
-            return json.DeserializeFromJson<OrderPayment>();
+            return json.DeserializeFromJson<PaymentInformation>();
         }
 
         var error = json.DeserializeFromJson<ErrorResponse>();

@@ -10,6 +10,6 @@ public interface IOrders
     Task<Response<PagedResponse<ShortOrder>>> GetOrdersAsync(OrdersPaginationQuery request, CancellationToken cancellationToken = default);
     Task<Response<Order>> GetOrderByIdAsync(string orderId, CancellationToken cancellationToken = default);
     Task<Response<Order>> UpdateOrderByIdAsync(UpdateOrderRequest updateRequest, CancellationToken cancellationToken = default);
-    Task<Response<OrderPayment>> CaptureOrderAsync(CaptureOrderRequest captureRequest, CancellationToken cancellationToken = default);
-    Task<Response<OrderPayment>> CancelOrderAsync(CancelOrderRequest cancelRequest, CancellationToken cancellationToken = default);
+    Task<Response<PaymentInformation>> CaptureOrderAsync(CaptureOrderRequest captureRequest, CancellationToken cancellationToken = default);
+    Task<Response<PaymentInformation>> CancelOrderAsync(CancelOrderRequest cancelRequest, CancellationToken cancellationToken = default);
 }

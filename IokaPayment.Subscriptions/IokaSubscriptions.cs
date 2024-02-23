@@ -1,5 +1,4 @@
 ﻿using System.Net.Http.Json;
-using System.Text.Json;
 using IokaPayment.General.Models;
 using Microsoft.Extensions.Logging;
 
@@ -119,7 +118,7 @@ public class IokaSubscriptions : ISubscriptions
         return error;
     }
 
-    public async Task<Response<IReadOnlyCollection<OrderPayment>>> GetSubscriptionPaymentsAsync(GetSubscriptionPaymentsQuery query, CancellationToken cancellationToken = default)
+    public async Task<Response<IReadOnlyCollection<PaymentInformation>>> GetSubscriptionPaymentsAsync(GetSubscriptionPaymentsQuery query, CancellationToken cancellationToken = default)
     {
         var uri = $"{_configuration.Host}/subscriptions/{query.SubscriptionId}/payments?{query.ToQueryString()}";
         using var request = new HttpRequestMessage(HttpMethod.Get, uri);
@@ -128,7 +127,7 @@ public class IokaSubscriptions : ISubscriptions
         var json = await response.Content.ReadAsStringAsync(cancellationToken);
         if (response.IsSuccessStatusCode)
         {
-            var payments = json.DeserializeFromJson<List<OrderPayment>>();
+            var payments = json.DeserializeFromJson<List<PaymentInformation>>();
             return payments;
         }
         

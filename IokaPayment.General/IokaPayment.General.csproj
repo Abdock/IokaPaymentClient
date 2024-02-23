@@ -6,13 +6,13 @@
         <Nullable>enable</Nullable>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <LangVersion>12</LangVersion>
-        <Version>1.0.1</Version>
+        <Version>1.0.2</Version>
         <Title>IokaPayment.Core</Title>
         <Authors>Abosh</Authors>
         <Description>Core models, enums and helpers for other modules</Description>
         <RepositoryUrl>https://github.com/Abdock/IokaPaymentClient</RepositoryUrl>
         <PackageTags>Ioka</PackageTags>
-        <PackageReleaseNotes>Change .NET version to .NET 7.0</PackageReleaseNotes>
+        <PackageReleaseNotes>Extract abstraction to create query strings</PackageReleaseNotes>
     </PropertyGroup>
 
     <ItemGroup>

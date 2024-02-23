@@ -39,7 +39,7 @@ public class IokaPayments : IPayments
         return error;
     }
 
-    public async Task<Response<OrderPayment>> CreateCardPaymentAsync(CardPaymentByNewCard cardPayment, CancellationToken cancellationToken = default)
+    public async Task<Response<PaymentInformation>> CreateCardPaymentAsync(CardPaymentByNewCard cardPayment, CancellationToken cancellationToken = default)
     {
         cardPayment.ThrowIfValidationFailed();
         var uri = $"{_configuration.Host}/orders/{cardPayment.OrderId}/payments/card";
@@ -50,7 +50,7 @@ public class IokaPayments : IPayments
         var json = await response.Content.ReadAsStringAsync(cancellationToken);
         if (response.IsSuccessStatusCode)
         {
-            var payment = json.DeserializeFromJson<OrderPayment>();
+            var payment = json.DeserializeFromJson<PaymentInformation>();
             return payment;
         }
 
@@ -59,7 +59,7 @@ public class IokaPayments : IPayments
         return error;
     }
 
-    public async Task<Response<OrderPayment>> CreateCardPaymentAsync(CardPaymentBySavedCard cardPayment, CancellationToken cancellationToken = default)
+    public async Task<Response<PaymentInformation>> CreateCardPaymentAsync(CardPaymentBySavedCard cardPayment, CancellationToken cancellationToken = default)
     {
         cardPayment.ThrowIfValidationFailed();
         var uri = $"{_configuration.Host}/orders/{cardPayment.OrderId}/payments/card";
@@ -70,7 +70,7 @@ public class IokaPayments : IPayments
         var json = await response.Content.ReadAsStringAsync(cancellationToken);
         if (response.IsSuccessStatusCode)
         {
-            var payment = json.DeserializeFromJson<OrderPayment>();
+            var payment = json.DeserializeFromJson<PaymentInformation>();
             return payment;
         }
 
@@ -79,7 +79,7 @@ public class IokaPayments : IPayments
         return error;
     }
 
-    public async Task<Response<OrderPayment>> CreateToolPaymentAsync(ToolPayment toolPayment, CancellationToken cancellationToken = default)
+    public async Task<Response<PaymentInformation>> CreateToolPaymentAsync(ToolPayment toolPayment, CancellationToken cancellationToken = default)
     {
         toolPayment.ThrowIfValidationFailed();
         var uri = $"{_configuration.Host}/orders/{toolPayment.OrderId}/payments/tool";
@@ -90,7 +90,7 @@ public class IokaPayments : IPayments
         var json = await response.Content.ReadAsStringAsync(cancellationToken);
         if (response.IsSuccessStatusCode)
         {
-            var payment = json.DeserializeFromJson<OrderPayment>();
+            var payment = json.DeserializeFromJson<PaymentInformation>();
             return payment;
         }
 
@@ -99,7 +99,7 @@ public class IokaPayments : IPayments
         return error;
     }
 
-    public async Task<Response<OrderPayment>> GetPaymentByIdAsync(GetPayment query, CancellationToken cancellationToken = default)
+    public async Task<Response<PaymentInformation>> GetPaymentByIdAsync(GetPayment query, CancellationToken cancellationToken = default)
     {
         var uri = $"{_configuration.Host}/orders/{query.OrderId}/payments/{query.PaymentId}";
         using var request = new HttpRequestMessage(HttpMethod.Get, uri);
@@ -108,7 +108,7 @@ public class IokaPayments : IPayments
         var json = await response.Content.ReadAsStringAsync(cancellationToken);
         if (response.IsSuccessStatusCode)
         {
-            var payment = json.DeserializeFromJson<OrderPayment>();
+            var payment = json.DeserializeFromJson<PaymentInformation>();
             return payment;
         }
 
